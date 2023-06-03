@@ -1,8 +1,13 @@
-import React from "react";
+import React, { Fragment } from "react";
+import DebtsForm from "../../components/DebtsForm";
+import Header from "../../components/Header";
 
 const NewDebts = () => {
     return (
-        <p>i</p>
+        <Fragment>
+            <Header />
+            <DebtsForm />
+        </Fragment>
     )
 }
 

@@ -4,8 +4,6 @@ import styled from "styled-components";
 const Wrapper = styled.div`
 margin-top: 10px;
 border-radius: 5px;
-height: 350px;
-width: 350px;
 box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
 `
 
@@ -18,6 +16,7 @@ justify-content: center;
 const Form = styled.form`
 display: flex;
 flex-direction: column;
+width: 200px;
 `;
 
 const Input = styled.input`
@@ -37,23 +36,39 @@ const Label = styled.label`
 margin-top: 10px;
 margin-bottom: 10px;
 `
+const Wrapperr = styled.div`
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+const Box = styled.div`
+    width: 200px;
+`
 
-const DebtsTable = () => {
+const DebtsForm = () => {
     return (
-    <Wrapper>
-        <FormWrapper>
-          <Form>
-            <Label>Depuis quelle compte ?</Label>
-            <select></select>
-            <Label>Vers quelle compte ?</Label>
-            <select></select> 
-            <Label>Quelle montant ?</Label>
-            <select></select>
-            <Input type="number" />
-      
-            <Button type="submit">Transferer</Button>
-          </Form>
-        </FormWrapper>
-      </Wrapper>
+        <Wrapperr>
+            <Box>
+           <Form>
+             <Label>Libellé de dette</Label>
+             <Input  />
+             <Label>Créditeur</Label>
+             <Input  />
+             <Label>Montant</Label>
+             <Input  />
+             <Label>Date</Label>
+             <Input  />
+             <Label>Moyen de paiement</Label>
+             <Input  />
+             <Label>Rembourser</Label>
+             <select></select>     
+             <Button type="submit">Valider</Button>
+           </Form>
+            </Box>
+        </Wrapperr>
+
     )
-}
+};
+
+export default DebtsForm;
