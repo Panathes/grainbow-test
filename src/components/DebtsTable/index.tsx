@@ -1,7 +1,12 @@
-import React from "react";
-import { Wrapper } from "./style";
+import React, { useContext } from "react";
+import { Wrapper, Reimburse } from "./style";
+import TotalDebts from "../../context";
 
 const DebtsTable = () => {
+    const debts = useContext(TotalDebts)
+
+    console.log(debts)
+
     return (
     <Wrapper>
         <div className="table-container">
@@ -17,15 +22,16 @@ const DebtsTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <td>Hey</td>
-                    <td>Ho</td>
-                    <td>Hi</td>
-                    <td>Hey</td>
-                    <td>Ho</td>
-                    <td>Hi</td>
+                    {debts?.map(debt => (
+                    <tr key={debt.id}>
+                        <td>{debt.name}</td>
+                        <td>{debt.creditor}</td>
+                        <td>{debt.amount}</td>
+                        <td>{debt.date}</td>
+                        <td>{debt.paymentMethod}</td>
+                        <td><Reimburse isDone={debt.isDone}>{debt.isDone ? 'oui' : 'non'}</Reimburse></td>
                     </tr>
-
+                    ))}
                 </tbody>
             </table>
         </div>

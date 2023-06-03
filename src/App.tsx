@@ -14,7 +14,7 @@ const App = () =>  {
       setData(JSON.parse(storedData));
     }
   }, []);
-  console.log(data)
+  // console.log(data)
   // data.push(newObj);
   // localStorage.setItem('myData', JSON.stringify(data));
   return (
