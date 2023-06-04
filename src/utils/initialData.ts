@@ -6,7 +6,7 @@ export const initialData: Debt[] = [
         name: 'Location de ski',
         creditor: 'Paul',
         amount: 350,
-        date: new Date("2022-01-16"),
+        date: new Date("2022-02-16"),
         paymentMethod: 'CB',
         isDone: 'oui'  
     },

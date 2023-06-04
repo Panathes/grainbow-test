@@ -36,7 +36,6 @@ const App = () =>  {
       setData(JSON.parse(storedData));
     }
   }, []);
-  console.log(data)
   return (
     <TotalDebts.Provider value={data}>
       <RouterProvider router={router} />

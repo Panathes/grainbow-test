@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, } from 'react-hook-form';
+import { Box, Button, Form, Input, Label, Wrapper } from './style'
 import { Debt } from "../../context";
+
 
 export interface ModelData {
     id: string;
@@ -18,67 +19,35 @@ interface TransferProps {
     onSubmit: (data: Debt) => void;
 }
 
-const Form = styled.form`
-display: flex;
-flex-direction: column;
-width: 200px;
-`;
-
-const Input = styled.input`
-padding: 0.5rem;
-margin-bottom: 1rem;
-`;
-
-const Button = styled.button`
-margin-top: 10px;
-padding: 0.5rem;
-background-color: lightblue;
-border: none;
-cursor: pointer;
-`;
-
-const Label = styled.label`
-margin-top: 10px;
-margin-bottom: 10px;
-`
-const Wrapper = styled.div`
-    margin-top: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`
-const Box = styled.div`
-    width: 200px;
-`
-
-
 const DebtsForm = ({onSubmit, debt}: TransferProps) => {
-    const [update, setUpdate] = useState<any>()
+    const [update, setUpdate] = useState<any>(debt)
+
+    // useEffect(() => {
+    //     setUpdate(debt)
+    // }, [debt])
+    useEffect(() => {
+    }, [update])
+
     const { register, handleSubmit, formState: { errors } } = 
     useForm<Debt>(
         {
             defaultValues: {
-              id: debt ? debt.id : '',
-              name: debt ? debt.name : '',
-              creditor: debt ? debt.creditor : '',
-              amount: debt ? debt.amount : 0,
-              date: debt ? debt.date : new Date(),
-              paymentMethod: debt ? debt.paymentMethod : '',
-              isDone: debt ? debt.isDone : '' 
+              id: debt ? update?.id : '',
+              name: debt ? update?.name : '',
+              creditor: debt ? update?.creditor : '',
+              amount: debt ? update?.amount : 0,
+              date: debt ? update?.date : new Date(),
+              paymentMethod: debt ? update?.paymentMethod : '',
+              isDone: debt ? update?.isDone : '' 
             }
           }
     );
 
-    useEffect(() => {
-        setUpdate(debt)
-    }, [debt])
-
     const submitHandler: SubmitHandler<Debt> = data => {
-        console.log(data)
         onSubmit(data);
       };
 
-    console.log(update)
+    // console.log(update)
 
     return (
         <Wrapper>

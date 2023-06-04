@@ -22,6 +22,8 @@ const NewDebt = () => {
     }
 
     const addData = (data: Debt) => {
+        data.id = String(Math.floor(Math.random() * 1000))
+        console.log(data)
         debts.push(data);
         localStorage.setItem('debts', JSON.stringify(debts));
         navigate('/')

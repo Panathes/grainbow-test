@@ -1,15 +1,25 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect , useContext } from "react";
 import { Wrapper, Reimburse, Button } from "./style";
-import TotalDebts from "../../context";
+import TotalDebts, { Debt } from "../../context";
 import { useNavigate } from 'react-router-dom';
 const moment = require('moment');
 
 const DebtsTable = () => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const [id, setId] = useState<string>('')
+    const [debts, setDebts] = useState<Array<Debt>>();
+    const [id, setId] = useState<string>('');
 
-    const debts = useContext(TotalDebts)
+    // const debts = useContext(TotalDebts)
     const navigate = useNavigate();
+    let storedData = localStorage.getItem('debts')
+    
+    // JSON.parse(localStorage.getItem(storageKey))
+    // console.log(debtss)
+    useEffect(() => {
+      if (storedData) {
+        setDebts(JSON.parse(storedData))
+      }
+    }, [storedData])
 
     const goToAddPage = () => {
         navigate('/add')
@@ -26,13 +36,11 @@ const DebtsTable = () => {
     const deleteDebt = (id: string) => {      
         let newDebtsArray = debts?.filter((index) => index.id !== id)
         localStorage.setItem('debts', JSON.stringify(newDebtsArray));
-        console.log(newDebtsArray)
         setId('')
         toggleModal()
     }
 
     const openDeleteModal = (id: string) => {
-        console.log(id)
         toggleModal()
         setId(id)
     }
@@ -61,7 +69,7 @@ const DebtsTable = () => {
               <button onClick={toggleModal} className="button">
                 Cancel
               </button>
-              <button onClick={() => deleteDebt(id)} className="button is-danger">Save changes</button>
+              <button onClick={() => deleteDebt(id)} className="button is-danger">Supprimer</button>
             </footer>
           </div>
         </div>     
@@ -84,7 +92,7 @@ const DebtsTable = () => {
                         <td>{debt.name}</td>
                         <td>{debt.creditor}</td>
                         <td>{debt.amount}</td>
-                        <td>{moment(debt.date).format('DD-MM-YYYY')}</td>
+                        <td>{moment(debt.date).format('yyyy-MM-dd')}</td>
                         <td>{debt.paymentMethod}</td>
                         <td><Reimburse isDone={debt.isDone}>{debt.isDone}</Reimburse></td>
                         <td>
