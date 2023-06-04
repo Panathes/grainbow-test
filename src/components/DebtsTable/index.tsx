@@ -4,9 +4,6 @@ import TotalDebts from "../../context";
 
 const DebtsTable = () => {
     const debts = useContext(TotalDebts)
-
-    console.log(debts)
-
     return (
     <Wrapper>
         <div className="table-container">

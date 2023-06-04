@@ -1,17 +1,20 @@
 import React from "react";
 import styled from "styled-components";
+import { useForm, SubmitHandler } from 'react-hook-form';
 
-const Wrapper = styled.div`
-margin-top: 10px;
-border-radius: 5px;
-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-`
+export interface ModelData {
+    id: string;
+    name: string;
+    creditor: string;
+    amount: number;
+    date: string;
+    paymentMethod: string;
+    isDone: boolean;
+  }
 
-const FormWrapper = styled.div`
-margin-top: 30px;
-display: flex;
-justify-content: center;
-`
+interface TransferProps {
+    onSubmit: (data: ModelData) => void;
+}
 
 const Form = styled.form`
 display: flex;
@@ -36,7 +39,7 @@ const Label = styled.label`
 margin-top: 10px;
 margin-bottom: 10px;
 `
-const Wrapperr = styled.div`
+const Wrapper = styled.div`
     margin-top: 50px;
     display: flex;
     align-items: center;
@@ -46,27 +49,48 @@ const Box = styled.div`
     width: 200px;
 `
 
-const DebtsForm = () => {
+const DebtsForm = ({onSubmit}: TransferProps) => {
+    const { register, handleSubmit, formState: { errors } } = useForm<ModelData>();
+
+    const submitHandler: SubmitHandler<ModelData> = data => {
+        console.log(data)
+        onSubmit(data);
+      };
+
     return (
-        <Wrapperr>
+        <Wrapper>
             <Box>
-           <Form>
+           <Form onSubmit={handleSubmit(submitHandler)}>
              <Label>Libellé de dette</Label>
-             <Input  />
+             <Input type="text" {...register('name', { required: true, min: 0 })} />
+             {errors.amount?.type === 'required' && <span>Champs requis</span>}
+
              <Label>Créditeur</Label>
-             <Input  />
+             <Input type="text" {...register('creditor', { required: true, min: 0 })} />
+             {errors.amount?.type === 'required' && <span>Champs requis</span>}
+
              <Label>Montant</Label>
-             <Input  />
+             <Input type="number" {...register('amount', { required: true, min: 0 })} />
+             {errors.amount?.type === 'required' && <span>Champs requis</span>}
+             {errors.amount?.type === 'min' && <span>The amount must be greater than or equal to 0</span>}
+
              <Label>Date</Label>
-             <Input  />
+             <Input type="date" {...register('date', { required: true, min: 0 })} />
+             {errors.amount?.type === 'required' && <span>Champs requis</span>}
+
              <Label>Moyen de paiement</Label>
-             <Input  />
+             <Input type="text" {...register('paymentMethod', { required: true, min: 0 })} />
+             {errors.amount?.type === 'required' && <span>Champs requis</span>}
+
              <Label>Rembourser</Label>
-             <select></select>     
+             <select {...register("isDone")}>
+                <option value="oui">Oui</option>
+                <option value="non">Non</option>
+            </select>   
              <Button type="submit">Valider</Button>
            </Form>
             </Box>
-        </Wrapperr>
+        </Wrapper>
 
     )
 };
