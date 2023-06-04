@@ -1,11 +1,19 @@
 import React, { useContext } from "react";
 import { Wrapper, Reimburse } from "./style";
 import TotalDebts from "../../context";
+import { useNavigate } from 'react-router-dom';
 
 const DebtsTable = () => {
     const debts = useContext(TotalDebts)
+    const navigate = useNavigate();
+
+    const goToAddPage = () => {
+        navigate('/add')
+      };
+
     return (
     <Wrapper>
+        <button  onClick={goToAddPage} className="button is-info is-light">Ajouter</button>
         <div className="table-container">
             <table className="table is-fullwidth">
                 <thead>
@@ -27,6 +35,7 @@ const DebtsTable = () => {
                         <td>{debt.date}</td>
                         <td>{debt.paymentMethod}</td>
                         <td><Reimburse isDone={debt.isDone}>{debt.isDone ? 'oui' : 'non'}</Reimburse></td>
+                        <td>{debt.paymentMethod}</td>
                     </tr>
                     ))}
                 </tbody>
