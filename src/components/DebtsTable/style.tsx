@@ -7,3 +7,7 @@ export const Wrapper = styled.div`
 export const Reimburse = styled.p<{ isDone: boolean }>`
     color: ${props => props.isDone === true ? '#ff1b1c' : '#87ff65'}
 `;
+
+export const Button = styled.button`
+    margin-left: 5px;
+`
