@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useForm, SubmitHandler, } from 'react-hook-form';
 import { Box, Button, Form, Input, Label, Wrapper } from './style'
 import { Debt } from "../../context";
@@ -22,26 +22,36 @@ interface TransferProps {
 const DebtsForm = ({onSubmit, debt}: TransferProps) => {
     const [update, setUpdate] = useState<any>(debt)
 
-    // useEffect(() => {
-    //     setUpdate(debt)
-    // }, [debt])
-    useEffect(() => {
-    }, [update])
 
-    const { register, handleSubmit, formState: { errors } } = 
+
+
+    const { register, handleSubmit, formState: { errors }, reset } = 
     useForm<Debt>(
         {
             defaultValues: {
-              id: debt ? update?.id : '',
-              name: debt ? update?.name : '',
-              creditor: debt ? update?.creditor : '',
-              amount: debt ? update?.amount : 0,
-              date: debt ? update?.date : new Date(),
-              paymentMethod: debt ? update?.paymentMethod : '',
-              isDone: debt ? update?.isDone : '' 
+              id: debt ? debt?.id : '',
+              name: debt ? debt?.name : '',
+              creditor: debt ? debt?.creditor : '',
+              amount: debt ? debt?.amount : 0,
+              date: debt ? debt?.date : new Date(),
+              paymentMethod: debt ? debt?.paymentMethod : '',
+              isDone: debt ? debt?.isDone : '' 
             }
           }
     );
+    console.log(debt)
+
+    useEffect(() => {
+        reset({
+            id: debt ? debt?.id : '',
+            name: debt ? debt?.name : '',
+            creditor: debt ? debt?.creditor : '',
+            amount: debt ? debt?.amount : 0,
+            date: debt ? debt?.date : new Date(),
+            paymentMethod: debt ? debt?.paymentMethod : '',
+            isDone: debt ? debt?.isDone : '' 
+        })
+    }, [debt, reset])
 
     const submitHandler: SubmitHandler<Debt> = data => {
         onSubmit(data);
@@ -63,7 +73,7 @@ const DebtsForm = ({onSubmit, debt}: TransferProps) => {
                     {errors.amount?.type === 'required' && <span>Champs requis</span>}
 
                     <Label>Montant</Label>
-                    <Input type="number" {...register('amount', { required: true, min: 0 })} />
+                    <Input type="number" {...register('amount', { required: true, min: 0  })} />
                     {errors.amount?.type === 'required' && <span>Champs requis</span>}
                     {errors.amount?.type === 'min' && <span>The amount must be greater than or equal to 0</span>}
 
