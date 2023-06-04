@@ -19,7 +19,8 @@ const UpdateDebt = () => {
 
     const updateData = (data: Debt) => {
         debts?.push(data);
-        localStorage.setItem('myData', JSON.stringify(debts));
+        localStorage.setItem('debts', JSON.stringify(debts));
+        navigate('/')
     }
 
     return (

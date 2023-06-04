@@ -5,9 +5,9 @@ export interface Debt {
     name: string;
     creditor: string;
     amount: number;
-    date: string;
+    date: Date;
     paymentMethod: string;
-    isDone: boolean;
+    isDone: string;
 }
 
 const TotalDebts = createContext<Debt[] | null>(null)

@@ -51,6 +51,7 @@ const Box = styled.div`
     width: 200px;
 `
 
+
 const DebtsForm = ({onSubmit, debt}: TransferProps) => {
     const [update, setUpdate] = useState<any>()
     const { register, handleSubmit, formState: { errors } } = 
@@ -61,9 +62,9 @@ const DebtsForm = ({onSubmit, debt}: TransferProps) => {
               name: debt ? debt.name : '',
               creditor: debt ? debt.creditor : '',
               amount: debt ? debt.amount : 0,
-              date: debt ? debt.date : '',
+              date: debt ? debt.date : new Date(),
               paymentMethod: debt ? debt.paymentMethod : '',
-              isDone: debt ? debt.isDone : false 
+              isDone: debt ? debt.isDone : '' 
             }
           }
     );

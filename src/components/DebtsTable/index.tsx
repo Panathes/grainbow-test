@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Wrapper, Reimburse, Button } from "./style";
 import TotalDebts from "../../context";
 import { useNavigate } from 'react-router-dom';
+const moment = require('moment');
 
 const DebtsTable = () => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -24,6 +25,7 @@ const DebtsTable = () => {
 
     const deleteDebt = (id: string) => {      
         let newDebtsArray = debts?.filter((index) => index.id !== id)
+        localStorage.setItem('debts', JSON.stringify(newDebtsArray));
         console.log(newDebtsArray)
         setId('')
         toggleModal()
@@ -82,9 +84,9 @@ const DebtsTable = () => {
                         <td>{debt.name}</td>
                         <td>{debt.creditor}</td>
                         <td>{debt.amount}</td>
-                        <td>{debt.date}</td>
+                        <td>{moment(debt.date).format('DD-MM-YYYY')}</td>
                         <td>{debt.paymentMethod}</td>
-                        <td><Reimburse isDone={debt.isDone}>{debt.isDone ? 'oui' : 'non'}</Reimburse></td>
+                        <td><Reimburse isDone={debt.isDone}>{debt.isDone}</Reimburse></td>
                         <td>
                             <Button onClick={() => goToUpdate(debt.id)} className="button is-info">Modifier</Button>
                             <Button onClick={() => openDeleteModal(debt.id)} className="button is-danger">Supprimer</Button>
