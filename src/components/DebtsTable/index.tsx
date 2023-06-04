@@ -14,6 +14,10 @@ const DebtsTable = () => {
         navigate('/add')
       };
 
+    const goToUpdate = (id: string) => {
+      navigate(`/${id}`)
+    }
+
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen)
     }
@@ -25,7 +29,7 @@ const DebtsTable = () => {
         toggleModal()
     }
 
-    const test = (id: string) => {
+    const openDeleteModal = (id: string) => {
         console.log(id)
         toggleModal()
         setId(id)
@@ -82,8 +86,8 @@ const DebtsTable = () => {
                         <td>{debt.paymentMethod}</td>
                         <td><Reimburse isDone={debt.isDone}>{debt.isDone ? 'oui' : 'non'}</Reimburse></td>
                         <td>
-                            <Button className="button is-info">Modifier</Button>
-                            <Button onClick={() => test(debt.id)} className="button is-danger">Supprimer</Button>
+                            <Button onClick={() => goToUpdate(debt.id)} className="button is-info">Modifier</Button>
+                            <Button onClick={() => openDeleteModal(debt.id)} className="button is-danger">Supprimer</Button>
                         </td>
                     </tr>
                     ))}

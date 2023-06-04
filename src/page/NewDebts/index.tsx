@@ -1,16 +1,16 @@
 import React, { Fragment } from "react";
 import DebtsForm from "../../components/DebtsForm";
 import Header from "../../components/Header";
-import { ModelData } from "../../components/DebtsForm";
 import { Button } from "./style";
 import { useNavigate } from 'react-router-dom';
+import { Debt } from "../../context";
 
 
 const NewDebt = () => {
     const storedData = localStorage.getItem('debts');
     const navigate = useNavigate();
 
-    let debts: Array<ModelData> = [];
+    let debts: Array<Debt> = [];
 
     if (storedData) {
         // Convertissez les données en un tableau d'objets
@@ -21,7 +21,7 @@ const NewDebt = () => {
         navigate('/')
     }
 
-    const addData = (data: ModelData) => {
+    const addData = (data: Debt) => {
         debts.push(data);
         localStorage.setItem('myData', JSON.stringify(debts));
       }; 

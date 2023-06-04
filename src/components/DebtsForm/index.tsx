@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { Debt } from "../../context";
 
 export interface ModelData {
     id: string;
@@ -13,7 +14,8 @@ export interface ModelData {
   }
 
 interface TransferProps {
-    onSubmit: (data: ModelData) => void;
+    debt?: Debt
+    onSubmit: (data: Debt) => void;
 }
 
 const Form = styled.form`
@@ -49,17 +51,38 @@ const Box = styled.div`
     width: 200px;
 `
 
-const DebtsForm = ({onSubmit}: TransferProps) => {
-    const { register, handleSubmit, formState: { errors } } = useForm<ModelData>();
+const DebtsForm = ({onSubmit, debt}: TransferProps) => {
+    const [update, setUpdate] = useState<any>()
+    const { register, handleSubmit, formState: { errors } } = 
+    useForm<Debt>(
+        {
+            defaultValues: {
+              id: debt ? debt.id : '',
+              name: debt ? debt.name : '',
+              creditor: debt ? debt.creditor : '',
+              amount: debt ? debt.amount : 0,
+              date: debt ? debt.date : '',
+              paymentMethod: debt ? debt.paymentMethod : '',
+              isDone: debt ? debt.isDone : false 
+            }
+          }
+    );
 
-    const submitHandler: SubmitHandler<ModelData> = data => {
+    useEffect(() => {
+        setUpdate(debt)
+    }, [debt])
+
+    const submitHandler: SubmitHandler<Debt> = data => {
         console.log(data)
         onSubmit(data);
       };
 
+    console.log(update)
+
     return (
         <Wrapper>
             <Box>
+                <h1>{debt ? 'Éditer dette' : 'Nouvelle dette' }</h1>
                 <Form onSubmit={handleSubmit(submitHandler)}>
                     <Label>Libellé de dette</Label>
                     <Input type="text" {...register('name', { required: true, min: 0 })} />
