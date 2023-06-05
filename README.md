@@ -7,25 +7,40 @@ Le projet réalisé est un gestionnaire de dette (je sais, ce n’est pas le suj
 ## Structure du projet
 
 component: Contenant les composants React réutilisables de l'application.
+
 type: Contenant le principal type manipuler (Debt).
+
 page: Contenant les différentes vues de l'application.
+
 utils: Contenant les données factice l’initialisation de l’application.
 
 ## Librairies utilisé:
 
 Typescript
+
 Bulma
+
 Moment
+
 React-hook-form
+
 React-router-dom
+
 Styled-components
+
 Prettier
+
+## Workflow 
+
+Initialement je procède de la manière suivante : branche pour une nouvelle fonctionnalité > push sur la branche dev > push sur la branche main. Pour aller au plus vite j’ai décidé de push directement sur la branche main mais cela n’est clairement pas comment je fonctionne.
+
 
 ## Commandes
 
 Pour installer et lancer le projet, réalisés les commandes suivantes:
 
 npm i
+
 npm start
 
 ## Explication sur certains choix techniques
