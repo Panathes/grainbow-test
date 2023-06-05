@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { useForm, SubmitHandler, } from 'react-hook-form';
 import { Box, Button, Form, Input, Label, Wrapper } from './style'
 import { Debt } from "../../context";
@@ -20,10 +20,6 @@ interface TransferProps {
 }
 
 const DebtsForm = ({onSubmit, debt}: TransferProps) => {
-    const [update, setUpdate] = useState<any>(debt)
-
-
-
 
     const { register, handleSubmit, formState: { errors }, reset } = 
     useForm<Debt>(
@@ -39,10 +35,8 @@ const DebtsForm = ({onSubmit, debt}: TransferProps) => {
             }
           }
     );
-    console.log(debt)
 
     useEffect(() => {
-        setUpdate(debt)
         reset({
             id: debt ? debt?.id : '',
             name: debt ? debt?.name : '',
@@ -58,7 +52,9 @@ const DebtsForm = ({onSubmit, debt}: TransferProps) => {
         onSubmit(data);
       };
 
-    // console.log(update)
+    const isReimburse:string[] = ['Oui','Non']
+    const choosePaymentMethod:string[] = ['CB', 'Espèces', 'Portefeuille virtuel','Paiement mobile','Virement bancaire', 'Chèques']
+
 
     return (
         <Wrapper>
@@ -83,13 +79,18 @@ const DebtsForm = ({onSubmit, debt}: TransferProps) => {
                     {errors.amount?.type === 'required' && <span>Champs requis</span>}
 
                     <Label>Moyen de paiement</Label>
-                    <Input type="text" {...register('paymentMethod', { required: true, min: 0 })} />
+                    <select {...register("paymentMethod")}>
+                        {choosePaymentMethod.map(val => (
+                            <option>{val}</option>
+                        ))}
+                    </select> 
                     {errors.amount?.type === 'required' && <span>Champs requis</span>}
 
                     <Label>Rembourser</Label>
                     <select {...register("isDone")}>
-                        <option value="oui">Oui</option>
-                        <option value="non">Non</option>
+                        {isReimburse.map(val => (
+                            <option>{val}</option>
+                        ))}
                     </select>   
                     <Button type="submit">Valider</Button>
                 </Form>

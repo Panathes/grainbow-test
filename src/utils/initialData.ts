@@ -6,7 +6,7 @@ export const initialData: Debt[] = [
         name: 'Location de ski',
         creditor: 'Paul',
         amount: 350,
-        date: new Date("2022-02-16"),
+        date: new Date().toISOString().substring(0,10),
         paymentMethod: 'CB',
         isDone: 'oui'  
     },
@@ -15,7 +15,7 @@ export const initialData: Debt[] = [
         name: 'Repas',
         creditor: 'Lauriane',
         amount: 10,
-        date: new Date("2022-01-16"),
+        date: new Date().toISOString().substring(0,10),
         paymentMethod: 'CB',
         isDone: 'oui'  
     },
@@ -24,7 +24,7 @@ export const initialData: Debt[] = [
         name: 'Cinéma',
         creditor: 'Axel',
         amount: 17,
-        date: new Date("2022-01-16"),
+        date: new Date().toISOString().substring(0,10),
         paymentMethod: 'CB',
         isDone: 'non'  
     },
@@ -33,7 +33,7 @@ export const initialData: Debt[] = [
         name: 'Vacances',
         creditor: 'Pierrafeu',
         amount: 700,
-        date: new Date("2022-01-16"),
+        date: new Date().toISOString().substring(0,10),
         paymentMethod: 'CB',
         isDone: 'non'  
     }

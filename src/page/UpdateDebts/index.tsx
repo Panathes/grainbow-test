@@ -14,7 +14,6 @@ const UpdateDebt = () => {
           setDebts(JSON.parse(storedData))
         }
       }, [storedData])
-    //   console.log(storedData)
 
     const  debtId  = useParams();   
     // const debts = useContext(TotalDebts)
@@ -36,7 +35,6 @@ const UpdateDebt = () => {
             }
             return obj;
           });
-        console.log(updateDebts)
         localStorage.setItem('debts', JSON.stringify(updateDebts));
         navigate('/')
     }
