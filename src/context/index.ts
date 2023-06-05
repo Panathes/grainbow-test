@@ -5,7 +5,7 @@ export interface Debt {
     name: string;
     creditor: string;
     amount: number;
-    date: Date;
+    date: string | Date;
     paymentMethod: string;
     isDone: string;
 }

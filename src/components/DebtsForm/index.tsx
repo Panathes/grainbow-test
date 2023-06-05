@@ -42,12 +42,13 @@ const DebtsForm = ({onSubmit, debt}: TransferProps) => {
     console.log(debt)
 
     useEffect(() => {
+        setUpdate(debt)
         reset({
             id: debt ? debt?.id : '',
             name: debt ? debt?.name : '',
             creditor: debt ? debt?.creditor : '',
             amount: debt ? debt?.amount : 0,
-            date: debt ? debt?.date : new Date(),
+            date: debt ? debt?.date : new Date().toISOString().substring(0,10),
             paymentMethod: debt ? debt?.paymentMethod : '',
             isDone: debt ? debt?.isDone : '' 
         })
@@ -78,7 +79,7 @@ const DebtsForm = ({onSubmit, debt}: TransferProps) => {
                     {errors.amount?.type === 'min' && <span>The amount must be greater than or equal to 0</span>}
 
                     <Label>Date</Label>
-                    <Input type="date" {...register('date', { required: true, min: 0 })} />
+                    <Input type="date" {...register('date', { required: true })} />
                     {errors.amount?.type === 'required' && <span>Champs requis</span>}
 
                     <Label>Moyen de paiement</Label>
