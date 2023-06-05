@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import Homepage from './page/Homepage';
-import NewDebt from './page/NewDebts';
-import UpdateDebt from './page/UpdateDebts';
-import initialData from './utils/initialData';
-import TotalDebts from './context';
+import React, { useEffect, useState } from "react";
+import Homepage from "./page/Homepage";
+import NewDebt from "./page/NewDebts";
+import UpdateDebt from "./page/UpdateDebts";
+import initialData from "./utils/initialData";
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const App = () =>  {
-
+const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
@@ -24,23 +19,19 @@ const App = () =>  {
     {
       path: "/add",
       element: <NewDebt />,
-    }
+    },
   ]);
 
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem('debts', JSON.stringify(initialData))
-    const storedData = localStorage.getItem('debts');
+    localStorage.setItem("debts", JSON.stringify(initialData));
+    const storedData = localStorage.getItem("debts");
     if (storedData) {
       setData(JSON.parse(storedData));
     }
   }, []);
-  return (
-    <TotalDebts.Provider value={data}>
-      <RouterProvider router={router} />
-  </TotalDebts.Provider>
-  )
-}
+  return <RouterProvider router={router} />;
+};
 
 export default App;
