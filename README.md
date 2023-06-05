@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+# Documentation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+Le projet réalisé est un gestionnaire de dette (je sais, ce n’est pas le sujet le plus vendeur) permettant de créer/lister/éditer et supprimer des dettes.
 
-In the project directory, you can run:
+## Structure du projet
 
-### `npm start`
+component: Contenant les composants React réutilisables de l'application.
+type: Contenant le principal type manipuler (Debt).
+page: Contenant les différentes vues de l'application.
+utils: Contenant les données factice l’initialisation de l’application.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Librairies utilisé:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Typescript
+Bulma
+Moment
+React-hook-form
+React-router-dom
+Styled-components
+Prettier
 
-### `npm test`
+## Commandes
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Pour installer et lancer le projet, réalisés les commandes suivantes:
 
-### `npm run build`
+npm i
+npm start
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Explication sur certains choix techniques
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Formulaire: Formik vs React-hook-form
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Initialement je voulais utiliser Formik, la libraires étant utilisé par Grainbow, mais en lisant un article, j’ai vu que Formik était plus maintenu et que la librairie de gestion de formulaire la plus plébiscité était React-hook-Form. J’ai voulu testé React-hook-form afin d’avoir une première expérience dessus.
 
-### `npm run eject`
+### Les valeurs de isReimburse et choosePaymentMethod de DebtForm
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Un choix plus intéressant serai de transformer ces 2 variables en type Enum
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Localstorage, useContext et Redux
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Initialement je suis parti sur le choix d’utiliser useContext, trouvant que mettre en place un Redux était overkill par rapport au besoin. Mais au fur et à mesure que le test avançait, j’ai privilégié le choix d’utiliser uniquement le localstorage, pour pouvoir persister les données.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Storybook
 
-## Learn More
+J'ai hésité à mettre en place un storybook pour montrer l'utilisation des composants de l'application. Je ne sais pas si c'était le bon choix mais je trouvais également cela overkill par rapport au besoin.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Difficulté rencontré
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+La seule difficulté rencontrée a été au moment de la réalisation de la fonctionnalité d’édition d’une dette. Les valeurs transmises au formulaire étaient toutes undefined.
+
+Ceci est dû au fonctionnement du defaultValues : https://www.react-hook-form.com/api/useform/#defaultValues
+
+Les valeurs sont définies au render du composant, avant le useEffect, rendant la valeur undefined.
+
+Pour pallier à ce problème, j’ai choisi d’utiliser la props reset : https://www.react-hook-form.com/api/useform/reset/
