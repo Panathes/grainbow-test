@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
 `
 
 export const Reimburse = styled.p<{ isDone: string }>`
-    color: ${props => props.isDone === 'oui' ? '#87ff65' : '#ff1b1c'}
+    color: ${props => props.isDone === 'Oui' ? '#87ff65' : '#ff1b1c'}
 `;
 
 export const Button = styled.button`

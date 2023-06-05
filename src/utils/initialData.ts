@@ -8,7 +8,7 @@ export const initialData: Debt[] = [
         amount: 350,
         date: new Date().toISOString().substring(0,10),
         paymentMethod: 'CB',
-        isDone: 'oui'  
+        isDone: 'Oui'  
     },
     {
         id: '2',
@@ -17,7 +17,7 @@ export const initialData: Debt[] = [
         amount: 10,
         date: new Date().toISOString().substring(0,10),
         paymentMethod: 'CB',
-        isDone: 'oui'  
+        isDone: 'Oui'  
     },
     {
         id: '3',
@@ -26,7 +26,7 @@ export const initialData: Debt[] = [
         amount: 17,
         date: new Date().toISOString().substring(0,10),
         paymentMethod: 'CB',
-        isDone: 'non'  
+        isDone: 'Non'  
     },
     {
         id: '4',
@@ -35,7 +35,7 @@ export const initialData: Debt[] = [
         amount: 700,
         date: new Date().toISOString().substring(0,10),
         paymentMethod: 'CB',
-        isDone: 'non'  
+        isDone: 'Non'  
     }
 ];
 
