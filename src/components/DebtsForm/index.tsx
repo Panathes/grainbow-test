@@ -52,14 +52,14 @@ const DebtsForm = ({ onSubmit, debt }: TransferProps) => {
             type="text"
             {...register("name", { required: true, min: 0 })}
           />
-          {errors.amount?.type === "required" && <span>Champs requis</span>}
+          {errors.name?.type === "required" && <span>Champs requis</span>}
 
           <Label>Créditeur</Label>
           <Input
             type="text"
             {...register("creditor", { required: true, min: 0 })}
           />
-          {errors.amount?.type === "required" && <span>Champs requis</span>}
+          {errors.creditor?.type === "required" && <span>Champs requis</span>}
 
           <Label>Montant</Label>
           <Input
@@ -73,7 +73,7 @@ const DebtsForm = ({ onSubmit, debt }: TransferProps) => {
 
           <Label>Date</Label>
           <Input type="date" {...register("date", { required: true })} />
-          {errors.amount?.type === "required" && <span>Champs requis</span>}
+          {errors.date?.type === "required" && <span>Champs requis</span>}
 
           <Label>Moyen de paiement</Label>
           <select {...register("paymentMethod")}>
@@ -81,7 +81,7 @@ const DebtsForm = ({ onSubmit, debt }: TransferProps) => {
               <option>{val}</option>
             ))}
           </select>
-          {errors.amount?.type === "required" && <span>Champs requis</span>}
+          {errors.paymentMethod?.type === "required" && <span>Champs requis</span>}
 
           <Label>Rembourser</Label>
           <select {...register("isDone")}>
@@ -89,6 +89,7 @@ const DebtsForm = ({ onSubmit, debt }: TransferProps) => {
               <option>{val}</option>
             ))}
           </select>
+          {errors.isDone?.type === "isDone" && <span>Champs requis</span>}
           <Button type="submit">Valider</Button>
         </Form>
       </Box>
