@@ -57,6 +57,8 @@ Un choix plus intéressant serai de transformer ces 2 variables en type Enum
 
 Initialement je suis parti sur le choix d’utiliser useContext, trouvant que mettre en place un Redux était overkill par rapport au besoin. Mais au fur et à mesure que le test avançait, j’ai privilégié le choix d’utiliser uniquement le localstorage, pour pouvoir persister les données.
 
+### Modal et Tableau
+
 Update: j'ai remarqué un axe d'amélioration concernant le composant DebtTable, le composant contient la modal et le tableau. La meilleur solution serai de mettre la modal dans un commposant à part afin de séparer la resposabilité du composant.
 
 ### Storybook
